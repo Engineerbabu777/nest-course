@@ -7,11 +7,11 @@ import { UsersService } from './users.service';
 export class UsersController {
 
     // / users
-    constructor(private userService:UsersService){}
+    constructor(private readonly userService:UsersService){}
 
     @Get() // get request handler!
     findAll(@Query('role') role?:'INTERN'|'ENGINEER'|'ADMIN'){
-        return {role}
+        return this.userService.findAll(role);
     }
 
 
@@ -23,7 +23,7 @@ export class UsersController {
     // / users/:id
     @Get(':id') // get request handler!
     findOne(@Param('id') id:string){ 
-        return { id }
+        return this.userService.findOne(+id)
     }
 
     // /post method!
