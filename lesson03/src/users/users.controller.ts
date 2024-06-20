@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
 // eslint-disable-next-line prettier/prettier
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
 
     // / users
+    constructor(private userService:UsersService){}
 
     @Get() // get request handler!
     findAll(@Query('role') role?:'INTERN'|'ENGINEER'|'ADMIN'){
