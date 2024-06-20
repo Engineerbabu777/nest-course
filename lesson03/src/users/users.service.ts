@@ -22,13 +22,14 @@ export class UsersService {
       email: 'lean3@gmail.com',
       role: 'INTERN'
     }
-  ]
+  ];
 
 
   findAll(role?:'INTERN'|"ENGINEER"|"ADMIN"){
-    if(role){
-        return this.users.filter(user => user.role === role)
-    }
+    // if(role){
+    //     return this.users.filter(user => user.role === role)
+    // }
+    // return {a:role}
     return this.users;
   }
 
@@ -41,11 +42,11 @@ export class UsersService {
   }
 
   create(user:{name:string,email:string,role:"INTERN"|"ENGINEER"|"ADMIN"}){
-    const usersByHighestId = [...this.users].sort((a,b) => b.id = a.id)
+    const usersByHighestId = [...this.users].sort((a,b) => b.id - a.id)
 
     const newUser = {
         id: usersByHighestId[0].id + 1,
-        ...users
+        ...user
     }
 
     this.users.push(newUser)
@@ -74,6 +75,10 @@ export class UsersService {
     return removedUser
   }
 
+  test(){
+    console.log("Hello")
+    return "abc"
+  }
 
 
 

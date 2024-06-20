@@ -7,11 +7,14 @@ import { UsersService } from './users.service';
 export class UsersController {
 
     // / users
-    constructor(private readonly userService:UsersService){}
+    constructor(private userService:UsersService){
+        console.log("Injected")
+        userService?.test()
+    }
 
     @Get() // get request handler!
     findAll(@Query('role') role?:'INTERN'|'ENGINEER'|'ADMIN'){
-        return this.userService.findAll(role);
+        return this.userService?.findAll(role);
     }
 
 
@@ -28,51 +31,22 @@ export class UsersController {
 
     // /post method!
     @Post()
-    create(@Body() user:{}){
-       return user
+    create(@Body() user:{name:string,email:string,role:"INTERN"|"ENGINEER"|"ADMIN"}){
+       return this.userService.create(user)
     }
 
      // / users/:id
      @Patch(':id') // patch request handler :id!
-     update(@Param('id') id:string,@Body() user:{}){ 
-         return { id ,user }
+     update(@Param('id') id:string,@Body() user:{name:string,email:string,role:"INTERN"|"ENGINEER"|"ADMIN"}){ 
+         return this.userService.update(+id,user)
      }
        
      // / users/:id
      @Delete(':id') // patch request handler :id!
      delete(@Param('id') id:string){ 
-         return { id }
+         return this.userService.delete(+id)
      }
 
    
 }
 
-
-/*
-
-khgh 
-jhvguhasgd
-navshdg
-vajhsdv 
-kjiaghsdih 
-bawhgdihqwvd
-kbaidgawbjd
-kavhwdhigawkasuhdg
-kqwhidgiqwgid
-kvauduiawghd
-kaushduhvasd
-knvasuduhavd
-ajgsduhguahd
-jkavsdufuagvd
-kavduvaudv
-knavdhvudv
-kavsuduadv
-knvsgdfvgdv
-jabsduhfadhv
-javsdgfvad
-kavsduvasudv
-kavsduhvauhsdv
-absduhvashid
-mlabsdjvagusdv
-bvasdhvasduh
-*/
